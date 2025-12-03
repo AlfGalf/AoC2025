@@ -48,3 +48,16 @@ pub mod day2 {
             .collect())
     }
 }
+
+pub mod day3 {
+    use std::{error::Error, fs::read_to_string};
+
+    pub fn import_data(file: &str) -> Result<Vec<Vec<u8>>, Box<dyn Error>> {
+        let contents = read_to_string(file)?;
+        Ok(contents
+            .lines()
+            .into_iter()
+            .map(|line| line.chars().map(|c| (c as u8 - '0' as u8)).collect())
+            .collect())
+    }
+}

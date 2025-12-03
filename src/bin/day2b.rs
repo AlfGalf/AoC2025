@@ -21,8 +21,8 @@ fn is_valid(val: &usize) -> bool {
         // println!("i {i}, quota: {quota}, guess: {guess}");
 
         if &guess == val {
-            println!("Val: {val} len: {len}");
-            println!("FAKE");
+            // println!("Val: {val} len: {len}");
+            // println!("FAKE");
             return false;
         }
     }
