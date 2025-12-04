@@ -61,3 +61,41 @@ pub mod day3 {
             .collect())
     }
 }
+
+pub mod day4 {
+    use std::{error::Error, fs::read_to_string};
+
+    const NEIGHBOURS: [(isize, isize); 8] = [
+        (-1, -1),
+        (-1, 0),
+        (-1, 1),
+        (0, -1),
+        (0, 1),
+        (1, -1),
+        (1, 0),
+        (1, 1),
+    ];
+
+    pub fn get_neighbours(
+        (x, y): (usize, usize),
+        (width, height): (usize, usize),
+    ) -> impl Iterator<Item = (usize, usize)> {
+        NEIGHBOURS.into_iter().filter_map(move |(dx, dy)| {
+            let (nx, ny): (isize, isize) = (x as isize + dx, y as isize + dy);
+            if nx < 0 || nx >= width as isize || ny < 0 || ny >= height as isize {
+                None
+            } else {
+                Some((nx as usize, ny as usize))
+            }
+        })
+    }
+
+    pub fn import_data(file: &str) -> Result<Vec<Vec<u8>>, Box<dyn Error>> {
+        let contents = read_to_string(file)?;
+        Ok(contents
+            .lines()
+            .into_iter()
+            .map(|line| line.bytes().collect::<Vec<u8>>())
+            .collect())
+    }
+}
