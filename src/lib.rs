@@ -99,3 +99,28 @@ pub mod day4 {
             .collect())
     }
 }
+
+pub mod day5 {
+    use std::{error::Error, fs::read_to_string, ops::RangeInclusive};
+
+    pub fn import_data(
+        file: &str,
+    ) -> Result<(Vec<RangeInclusive<usize>>, Vec<usize>), Box<dyn Error>> {
+        let content_str = read_to_string(file)?;
+
+        let mut content_split = content_str.split("\n\n");
+        let ranges = content_split.next().unwrap();
+        let items = content_split.next().unwrap();
+
+        Ok((
+            ranges
+                .lines()
+                .map(|s| {
+                    let mut split = s.split('-');
+                    split.next().unwrap().parse().unwrap()..=split.next().unwrap().parse().unwrap()
+                })
+                .collect(),
+            items.lines().map(|s| s.parse().unwrap()).collect(),
+        ))
+    }
+}
